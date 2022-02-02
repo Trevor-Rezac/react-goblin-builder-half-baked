@@ -2,6 +2,7 @@ import './App.css';
 import GoblinForm from './GoblinForm';
 import GoblinList from './GoblinList';
 import Goblin from './Goblin';
+import { useState } from 'react';
 
 function App() {
   /* 
@@ -12,9 +13,14 @@ function App() {
       goblinFormHP, which is how we track the user input for the current HP of the goblin in the form
       goblinFormColor, which is how we track the user input for the current color of the goblin in the form
 */
+  const [goblinFormName, setGoblinFormName] = useState('');
+  const [goblinFormHP, setGoblinFormHP] = useState('');
+  const [goblinFormColor, setGoblinFormColor] = useState('blue');
+
+  console.log('||', goblinFormName, goblinFormHP, goblinFormColor);
   
   function submitGoblin(e) {
-    e.preventDefault()
+    e.preventDefault();
     
     // on submit, make a new goblin object with a random id, a name that comes from the form state, an hp that comes from the form state, and a color that comes from the form state
 
@@ -55,17 +61,14 @@ function App() {
         <input onChange={(e) => handleFilterGoblins(e.target.value)} />
       </div>
       <GoblinForm 
-        /*
-        This component takes in a ton of props! 
-        Here is the list of props to pass:
-          submitGoblin,
-          goblinFormName, 
-          setGoblinFormName,
-          goblinFormColor, 
-          setGoblinFormColor,
-          goblinFormHP, 
-          setGoblinFormHP,
-        */
+        // This component takes in a ton of props! 
+        submitGoblin={submitGoblin}
+        goblinFormName={goblinFormName} 
+        setGoblinFormName={setGoblinFormName}
+        goblinFormColor={goblinFormColor} 
+        setGoblinFormColor={setGoblinFormColor}
+        goblinFormHP={goblinFormHP}
+        setGoblinFormHP={setGoblinFormHP}
       />
       <GoblinList 
         goblins={[]} // this takes in an array of goblins. If the filteredGoblins has a length, use that array. Otherwise, use the allGoblins array 
