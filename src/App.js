@@ -13,9 +13,9 @@ function App() {
       goblinFormHP, which is how we track the user input for the current HP of the goblin in the form
       goblinFormColor, which is how we track the user input for the current color of the goblin in the form
 */
-  const [goblinFormName, setGoblinFormName] = useState('');
+  const [goblinFormName, setGoblinFormName] = useState('Goober');
   const [goblinFormHP, setGoblinFormHP] = useState('');
-  const [goblinFormColor, setGoblinFormColor] = useState('blue');
+  const [goblinFormColor, setGoblinFormColor] = useState('');
 
   console.log('||', goblinFormName, goblinFormHP, goblinFormColor);
   
@@ -49,10 +49,15 @@ function App() {
     <div className="App">
       <div className='current-goblin quarter'>
         <Goblin goblin={{
-          /* 
+        /* 
             use the goblin form state to make a goblin object and to display it. 
             This will let the user see the current form state 
           */
+          name: goblinFormName,
+          hp: goblinFormHP,
+          color: goblinFormColor
+          
+        
         }}/>
       </div>
       <div className='goblin-filter quarter'>
