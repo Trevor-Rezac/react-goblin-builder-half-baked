@@ -20,7 +20,7 @@ function App() {
   const [filteredGoblins, setFilteredGoblins] = useState([]);
 
   // console.log('||', goblinFormName, goblinFormHP, goblinFormColor);
-  console.log('||', allGoblins, filteredGoblins);
+  // console.log('||', allGoblins, filteredGoblins);
   
   function submitGoblin(e) {
     e.preventDefault();
@@ -40,6 +40,7 @@ function App() {
     setGoblinFormName('');
     setGoblinFormHP('');
     setGoblinFormColor('lightgreen');
+
   }
 
   function handleDeleteGoblin(id) {
@@ -52,16 +53,23 @@ function App() {
 
   function handleFilterGoblins(search) {
     // use the filter method to get an array of goblins whose name includes this search argument
-
+    const filteredGoblins = allGoblins.filter(goblin => goblin.name.includes(search));
     // if there is a search argument, set the filtered goblins to the filtered goblins
     // if the search argument is undefined, set the filtered goblins in state to just be the array of all goblins
+    
+    // setFilteredGoblins(filteredGoblins);
+    if (search) {
+      setFilteredGoblins(filteredGoblins);
+    } else {
+      setFilteredGoblins([]);
+    }
   }
 
 
   return (
     <div className="App">
       <div className='current-goblin quarter'>
-        <Goblin goblin={{
+        { goblinFormName && <Goblin goblin={{
         /* 
             use the goblin form state to make a goblin object and to display it. 
             This will let the user see the current form state 
@@ -71,7 +79,7 @@ function App() {
           color: goblinFormColor
           
         
-        }}/>
+        }}/>}
       </div>
       <div className='goblin-filter quarter'>
         Filter Goblins
