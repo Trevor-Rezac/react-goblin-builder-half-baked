@@ -16,17 +16,30 @@ function App() {
   const [goblinFormName, setGoblinFormName] = useState('Goober');
   const [goblinFormHP, setGoblinFormHP] = useState('');
   const [goblinFormColor, setGoblinFormColor] = useState('');
+  const [allGoblins, setAllGoblins] = useState(['goblin array']);
+  const [filteredGoblins, setFilteredGoblins] = useState(['filtered gobs']);
 
-  console.log('||', goblinFormName, goblinFormHP, goblinFormColor);
+  // console.log('||', goblinFormName, goblinFormHP, goblinFormColor);
+  console.log('||', allGoblins, filteredGoblins);
   
   function submitGoblin(e) {
     e.preventDefault();
     
     // on submit, make a new goblin object with a random id, a name that comes from the form state, an hp that comes from the form state, and a color that comes from the form state
+    const goblin = {
+      name: goblinFormName,
+      hp: goblinFormHP,
+      color: goblinFormColor,
+      id: Math.floor(Math.random() * 1000)
+    };
 
     // update the allGoblins array. Add the new goblin to the allGoblins array immutably.
+    setAllGoblins([...allGoblins, goblin]);
     
     // clear out the goblin form state items by setting them to empty strings. This will cause the form to reset in the UI.
+    setGoblinFormName('');
+    setGoblinFormHP('');
+    setGoblinFormColor('');
   }
 
   function handleDeleteGoblin(id) {
